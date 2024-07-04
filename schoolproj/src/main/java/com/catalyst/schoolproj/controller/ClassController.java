@@ -13,28 +13,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.catalyst.schoolproj.model.StudentMaster;
-import com.catalyst.schoolproj.repository.StudentRepo;
-import com.catalyst.schoolproj.service.StudentService;
+import com.catalyst.schoolproj.model.ClassMaster;
+import com.catalyst.schoolproj.model.ClassMaster;
+import com.catalyst.schoolproj.service.ClassService;
 
 @RestController
-@RequestMapping("/api/studentinfo")
-public class StudentController {
+@RequestMapping("/api/class-service")
+public class ClassController {
 	@Autowired
-	private StudentService studService;
+	private ClassService classService;
 	
-	@GetMapping("/students")
-	public List<StudentMaster> getAllStudents(){
+	@GetMapping("/classes")
+	public List<ClassMaster> getAllClasses(){
 		
-		return studService.getAllStudents();				
+		return classService.getAllClasses();				
 	}
 	
-	@PostMapping("/student")
-	public StudentMaster saveStudentData(@RequestBody StudentMaster studentData) {
+	@PostMapping("/class")
+	@ResponseStatus(value = HttpStatus.CREATED)
+	public ClassMaster saveclassData(@RequestBody ClassMaster classData) {
 		
-		StudentMaster stud=null;
+		ClassMaster stud=null;
 		try {
-			stud = studService.saveStudentData(studentData);
+			stud = classService.saveClassData(classData);
 			
 		} catch (Exception e) {
 			
@@ -45,20 +46,20 @@ public class StudentController {
 		
 	}
 	
-	@PatchMapping("/student/{id}")
+	@PatchMapping("/class/{id}")
 	@ResponseStatus (value = HttpStatus.CREATED)
-	public StudentMaster updateStudentData(@RequestBody StudentMaster studentData, @PathVariable int id ) {
+	public ClassMaster updateclassData(@RequestBody ClassMaster classData, @PathVariable Long id ) {
 		
-		StudentMaster stud=null;
+		ClassMaster cls=null;
 		try {
-			stud = studService.updateStudentData(studentData, id);
+			cls = classService.updateClassData(classData, id);
 			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}
 		
-		return stud;
+		return cls;
 		
 	}
 

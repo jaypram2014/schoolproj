@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class SchoolprojApplication {
 
 	public static void main(String[] args) {
-		System.setProperty("server.servlet.context-path", "/schoolproj");
+		//System.setProperty("server.servlet.context-path", "/schoolproj");
 		SpringApplication.run(SchoolprojApplication.class, args);
 	}
 

@@ -2,9 +2,9 @@ package com.catalyst.schoolproj.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.catalyst.schoolproj.model.StudentMaster;
+import com.catalyst.schoolproj.model.ClassMaster;
 
-public interface StudentRepo extends JpaRepository<StudentMaster, Integer>{
+public interface ClassRepo extends JpaRepository<ClassMaster, Long>{
     // Nothing here to override
 	
 	

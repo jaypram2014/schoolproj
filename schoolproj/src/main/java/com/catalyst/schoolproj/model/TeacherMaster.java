@@ -1,24 +1,25 @@
 package com.catalyst.schoolproj.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.TableGenerator;
-import jakarta.persistence.Temporal;
 
 @Entity
 @Table(name = "teacher_master", schema = "sms")
-@TableGenerator(name = "teacher_master_SEQ", table = "seq_id_table", schema = "sms", pkColumnName = "SEQ_NAME", valueColumnName = "SEQ_VALUE", initialValue = 1, allocationSize = 1)
+//@TableGenerator(name = "teacher_master_SEQ", table = "seq_id_table", schema = "sms", pkColumnName = "SEQ_NAME", valueColumnName = "SEQ_VALUE", initialValue = 1, allocationSize = 1)
 public class TeacherMaster implements Serializable {
 	@Id	
-	@GeneratedValue(strategy=GenerationType.TABLE, generator = "teacher_master_SEQ")
+	//@GeneratedValue(strategy=GenerationType.TABLE, generator = "teacher_master_SEQ")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "teacher_id")
     private Integer id;
 
@@ -49,6 +50,8 @@ public class TeacherMaster implements Serializable {
 	@Column(name = "remarks")
     private String remarks;
 	
+	
+	//private List<StudentMaster> students = new ArrayList<StudentMaster>();
 	
 	////////============== GETTERS / SETTERS METHODS ================/////////
 
@@ -131,5 +134,13 @@ public class TeacherMaster implements Serializable {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
+
+//	public List<StudentMaster> getStudents() {
+//		return students;
+//	}
+//
+//	public void setStudents(List<StudentMaster> students) {
+//		this.students = students;
+//	}
 
 }
