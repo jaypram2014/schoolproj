@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.catalyst.schoolproj.model.ClassMaster;
-import com.catalyst.schoolproj.model.ClassMaster;
 import com.catalyst.schoolproj.service.ClassService;
 
 @RestController
@@ -28,6 +27,13 @@ public class ClassController {
 		
 		return classService.getAllClasses();				
 	}
+	
+	@GetMapping("/classes/{id}")
+	public ClassMaster getClassById(@PathVariable Long id){
+		
+		return classService.getClassById(id);				
+	}
+	
 	
 	@PostMapping("/class")
 	@ResponseStatus(value = HttpStatus.CREATED)

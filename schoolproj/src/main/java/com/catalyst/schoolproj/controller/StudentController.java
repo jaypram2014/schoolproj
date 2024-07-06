@@ -18,7 +18,7 @@ import com.catalyst.schoolproj.repository.StudentRepo;
 import com.catalyst.schoolproj.service.StudentService;
 
 @RestController
-@RequestMapping("/api/studentinfo")
+@RequestMapping("/api/student-service")
 public class StudentController {
 	@Autowired
 	private StudentService studService;

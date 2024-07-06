@@ -1,12 +1,12 @@
 package com.catalyst.schoolproj.service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.catalyst.schoolproj.model.ClassMaster;
 import com.catalyst.schoolproj.model.ClassMaster;
 import com.catalyst.schoolproj.repository.ClassRepo;
 
@@ -54,6 +54,12 @@ public class ClassService {
 		}
 		
 		return cls;
+	}
+
+	public ClassMaster getClassById(Long id) {
+		
+		
+		return classRepo.findById(id).filter(Objects::nonNull).get();
 	}
 
 }
