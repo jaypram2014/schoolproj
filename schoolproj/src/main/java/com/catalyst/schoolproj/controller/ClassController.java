@@ -1,13 +1,15 @@
 package com.catalyst.schoolproj.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -21,52 +23,50 @@ import com.catalyst.schoolproj.service.ClassService;
 public class ClassController {
 	@Autowired
 	private ClassService classService;
-	
+
 	@GetMapping("/classes")
-	public List<ClassMaster> getAllClasses(){
-		
-		return classService.getAllClasses();				
+	public List<ClassMaster> getAllClasses() {
+
+		return classService.getAllClasses();
 	}
-	
+
 	@GetMapping("/classes/{id}")
-	public ClassMaster getClassById(@PathVariable Long id){
-		
-		return classService.getClassById(id);				
+	public ClassMaster getClassById(@PathVariable Long id) {
+
+		return classService.getClassById(id);
 	}
-	
-	
+
 	@PostMapping("/class")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public ClassMaster saveclassData(@RequestBody ClassMaster classData) {
-		
-		ClassMaster stud=null;
+
+		ClassMaster stud = null;
 		try {
 			stud = classService.saveClassData(classData);
-			
+
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
-		
+
 		return stud;
-		
+
 	}
-	
-	@PatchMapping("/class/{id}")
-	@ResponseStatus (value = HttpStatus.CREATED)
-	public ClassMaster updateclassData(@RequestBody ClassMaster classData, @PathVariable Long id ) {
+
+	@PutMapping("/class/{id}")
+	//@ResponseStatus(value = HttpStatus.CREATED)
+	public ResponseEntity<ClassMaster> updateclassData(@RequestBody ClassMaster classData, @PathVariable Long id) {
+
+		// ClassMaster cls=null;
+
+		// pipeline processing / waterflow
+		return Optional.ofNullable(classService.updateClassData(classData, id)).map(ResponseEntity::ok)
+				.orElse(ResponseEntity.badRequest().build());
+
 		
-		ClassMaster cls=null;
-		try {
-			cls = classService.updateClassData(classData, id);
-			
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
 		
-		return cls;
-		
+		//// return cls;
+
 	}
 
 }

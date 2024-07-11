@@ -1,9 +1,15 @@
 package com.catalyst.schoolproj.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -11,6 +17,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -59,9 +67,28 @@ public class StudentMaster implements Serializable {
 	@JoinColumn(name = "class_id")
 	private ClassMaster classMaster;
 	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable (
+			name = "student_subject",
+			schema = "sms",
+			joinColumns = {@JoinColumn(name="student_id")},
+			inverseJoinColumns = {@JoinColumn(name="subject_id")}
+			)				
+	private List<SubjectMaster> subjects = new ArrayList<SubjectMaster>(); 
+	
+	
     /////================= GETTER / SETTER ================ ////
 
 	
+	public List<SubjectMaster> getSubjects() {
+		return subjects;
+	}
+
+	
+	public void setSubjects(List<SubjectMaster> subjects) {
+		this.subjects = subjects;
+	}
+
 	public Long getId() {
 		return id;
 	}
