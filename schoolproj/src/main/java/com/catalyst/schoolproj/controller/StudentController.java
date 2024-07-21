@@ -47,7 +47,7 @@ public class StudentController {
 	
 	@PatchMapping("/student/{id}")
 	@ResponseStatus (value = HttpStatus.CREATED)
-	public StudentMaster updateStudentData(@RequestBody StudentMaster studentData, @PathVariable int id ) {
+	public StudentMaster updateStudentData(@RequestBody StudentMaster studentData, @PathVariable Long id ) {
 		
 		StudentMaster stud=null;
 		try {

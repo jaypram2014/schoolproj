@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,8 +37,8 @@ public class ClassController {
 		return classService.getClassById(id);
 	}
 
-	@PostMapping("/class")
-	@ResponseStatus(value = HttpStatus.CREATED)
+	@PostMapping(value="/class", produces = {MediaType.APPLICATION_JSON_VALUE , MediaType.APPLICATION_XML_VALUE}, headers = "content-type=application/json")
+	@ResponseStatus(value = HttpStatus.CREATED)		
 	public ClassMaster saveclassData(@RequestBody ClassMaster classData) {
 
 		ClassMaster stud = null;

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -24,6 +24,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "student_master", schema = "sms")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 //@TableGenerator(name = "student_master_SEQ", table = "seq_id_table", schema = "sms", pkColumnName = "SEQ_NAME", valueColumnName = "SEQ_VALUE", initialValue = 1, allocationSize = 1)
 public class StudentMaster implements Serializable {
 	@Id	
@@ -79,7 +80,7 @@ public class StudentMaster implements Serializable {
 	
     /////================= GETTER / SETTER ================ ////
 
-	
+	//@JsonManagedReference
 	public List<SubjectMaster> getSubjects() {
 		return subjects;
 	}

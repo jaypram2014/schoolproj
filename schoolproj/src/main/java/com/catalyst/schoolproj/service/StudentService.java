@@ -36,7 +36,7 @@ public class StudentService {
 
 	}
 	
-	public StudentMaster updateStudentData(StudentMaster studentData, int id) {
+	public StudentMaster updateStudentData(StudentMaster studentData, Long id) {
 		StudentMaster stud = null;
 		try {
 			Optional<StudentMaster> existingStudent = studRepo.findById(id);
