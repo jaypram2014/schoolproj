@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.catalyst.schoolproj.model.StudentMaster;
 import com.catalyst.schoolproj.repository.StudentRepo;
@@ -15,20 +14,32 @@ public class StudentService {
 
 	@Autowired
 	private StudentRepo studRepo;
+	
+	// find By ID
+	public StudentMaster getStudentById(Long id) {
+		StudentMaster student = null; 
+		Optional<StudentMaster> existingStudent = studRepo.findById(id);
+		if(existingStudent.isPresent()) {			
+			student = existingStudent.get();
+		}
+		
+		return student;
+	}
 
+	// find All
 	public List<StudentMaster> getAllStudents() {
 
 		return studRepo.findAll();
 	}
 
+	// CREATE A STUDENT
 	public StudentMaster saveStudentData(StudentMaster studentData) {
 
 		StudentMaster stud = null;
 		try {
 			stud = studRepo.save(studentData);
 
-		} catch (Exception e) {
-			
+		} catch (Exception e) {			
 			e.printStackTrace();
 		}
 
@@ -36,6 +47,7 @@ public class StudentService {
 
 	}
 	
+	// UPDATE EXISTING STUDENT
 	public StudentMaster updateStudentData(StudentMaster studentData, Long id) {
 		StudentMaster stud = null;
 		try {
@@ -48,8 +60,7 @@ public class StudentService {
 				
 				studRepo.save(stud);
 			}
-		
-			
+					
 		} catch (Exception e) {			
 			e.printStackTrace();
 		}

@@ -32,7 +32,14 @@ public class ClassService {
 	
 	@Autowired
 	private SubjectRepo subjectRepo;
-
+	
+	// find By ID
+	public ClassMaster getClassById(Long id) {
+		
+		return classRepo.findById(id).filter(Objects::nonNull).get();
+	}
+	
+	// find ALL
 	public List<ClassMaster> getAllClasses() {
 
 		return classRepo.findAll();
@@ -75,13 +82,7 @@ public class ClassService {
 		return classMaster;
 	}
 
-	public ClassMaster getClassById(Long id) {
-				
-		return classRepo.findById(id).filter(Objects::nonNull).get();
-	}
-	
-	
-	
+			
 	public ClassMaster createOrUpdateClass(ClassMaster classRequest, Long id) {
 		
 		ClassMaster classMaster = new ClassMaster();
@@ -101,7 +102,7 @@ public class ClassService {
 		
 	}
 	
-	/// CREATE CLASS - STUDENTS OPERATION :
+	/// CREATE CLASS - STUDENTS - SUBJECTS:
 	private ClassMaster createClassWorkFlow(ClassMaster classRequest) {
 		System.out.println("CREATE CLASS WORKFLOW ----");
 		ClassMaster classMaster=null;
