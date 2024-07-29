@@ -50,19 +50,26 @@ public class SubjectService {
 	public SubjectMaster saveSubjectData(SubjectMaster subjectData) {
 
 		SubjectMaster subject = null;
-		try {
+//		try {
 			SubjectMaster subjectNew = new SubjectMaster();
 			if(SubjectEnum.valueOf(subjectData.getSubjectName())!=null) {
-				subjectNew.setSubjectName(subjectData.getSubjectName());
-				subject = subjectRepo.save(subjectData);
+				
+				// Call FindyByName to check if the subject name exists then set the same subject over here else save new object
+				Optional<SubjectMaster> existingSubject = subjectRepo.findBySubjectName(subjectData.getSubjectName());
+				if(!existingSubject.isPresent()) {
+				   subjectNew.setSubjectName(subjectData.getSubjectName());
+				   subject = subjectRepo.save(subjectData);
+				}else {
+					throw new ResourceNotFoundException("Subject could not be saved :" + subjectData.getSubjectName()+", as this is already present.");
+				}
 			}else {
-				System.out.println("Please enter proper subject name");
+				throw new ResourceNotFoundException("Subject could not be saved :" + subjectData.getSubjectName()+", as this is invalid subject.");
 			}
 
-		} catch (Exception e) {			
-			throw new ResourceNotFoundException("Subject could not be saved :" + subjectData.getSubjectName());
-		
-		}
+//		} catch (Exception e) {			
+//			throw new ResourceNotFoundException("Subject could not be saved :" + subjectData.getSubjectName());
+//		
+//		}
 
 		return subject;
 
